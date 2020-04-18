@@ -1,0 +1,56 @@
+<%= stylesheet_link_tag "friendship" %>
+<div class="container">
+  <h1>
+    Friends Page
+  </h1>
+  <%= form_tag(friendships_add_friend_by_name_path, method: "post",class: "form-inline") do %>
+  <div class="col-auto my-4">
+        <label>
+          Enter Your Friend Name
+        </label>
+  </div>
+    <%= text_field_tag(:user_email, "", class: "form-control col-5", placeholder: 'e.g Eslam Elkholy')%>
+    <div class="col-auto my-1">
+      <%= submit_tag("Add Friend",class: "btn btn-success") %>
+    </div>
+  <% end %>
+  <% flash.each do |type, msg| %>
+    <% if msg == "Sorry This User Already Exist" || msg == "Sorry User Not Exist" %>
+      <div class="alert alert-danger col-4">
+        <%= msg %>
+      </div>
+    <% else %>
+      <div class="alert alert-success col-6">
+        <%= msg %>
+      </div>
+    <% end %>
+<% end %>
+  <div class="row">
+    <div class="panel-body col-6">
+      <h2>Users List</h2>
+      <ul class="list-group">
+        <% for user in @users %>
+        <li class="list-group-item">
+          <strong><%= user.email %></strong>
+          <% if !current_user.friends.include? user  %>
+          <%= link_to "Add Friend",friendships_path(:friend_id => user), :method => :post,class: "btn btn-info controllers" %>
+          <% end %>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="panel-body col-5 offset-1">
+      <h2>Friends List</h2>
+      <ul class="list-group">
+        <% for friendship in current_user.friendships %>
+        <li class="list-group-item">
+          <strong><%= friendship.friend.email%></strong>
+          <%= link_to "Remove", friendship, :method => :delete,class: "btn btn-danger controllers" %>
+        </li>
+        <% end %>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</div>
