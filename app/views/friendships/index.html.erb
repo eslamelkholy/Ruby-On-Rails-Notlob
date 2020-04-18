@@ -19,7 +19,8 @@
       <div class="alert alert-danger col-4">
         <%= msg %>
       </div>
-    <% else %>
+    <% end %>
+    <% if msg.include? "Has Been Added Successfully" %>
       <div class="alert alert-success col-6">
         <%= msg %>
       </div>

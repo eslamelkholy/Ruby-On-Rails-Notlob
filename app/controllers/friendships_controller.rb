@@ -11,7 +11,7 @@ class FriendshipsController < ApplicationController
     @friendship = current_user.friendships.build(:friend_id => params[:friend_id])
     respond_to do |format|
       if @friendship.save
-        format.html { redirect_to friendships_path, notice: @friendship.user.email.concat(" Has Been Added Successfully") }
+        format.html { redirect_to friendships_path, notice: @friendship.user.email.concat(" Has Been Created") }
         format.json { render :show, status: :created, location: @friendship }
       else
         format.html { render :new }
