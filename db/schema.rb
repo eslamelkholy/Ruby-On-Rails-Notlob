@@ -10,11 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_18_223837) do
+ActiveRecord::Schema.define(version: 2020_04_19_205024) do
 
   create_table "friendships", force: :cascade do |t|
     t.integer "user_id"
     t.integer "friend_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "order_type"
+    t.string "state"
+    t.integer "restaurant_id"
+    t.integer "cat_id"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
