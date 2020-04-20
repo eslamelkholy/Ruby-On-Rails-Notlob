@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :order_friends
   resources :orders
   resources :friendships
   post 'friendships/add_friend_by_name', to: 'friendships#add_friend_by_name'

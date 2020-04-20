@@ -15,6 +15,7 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @order = Order.new
+    @friends = Friendship.where(user_id: current_user.id)
   end
 
   # GET /orders/1/edit
@@ -25,15 +26,22 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = current_user.orders.build(order_params)
-    respond_to do |format|
-      if @order.save
-        format.html { redirect_to @order, notice: 'Order was successfully created.' }
-        format.json { render :show, status: :created, location: @order }
-      else
-        format.html { render :new }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
-      end
+    @order.save
+    print "Paraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaams"
+    @users = User.where(id: params[:order_friends])
+    @users.each do |friend|
+      @order_friend = OrderFriend.new(:order_id => @order.id, :user_id => friend.id)
+      @order_friend.save
     end
+    # respond_to do |format|
+    #   if @order.save
+    #     format.html { redirect_to @order, notice: 'Order was successfully created.' }
+    #     format.json { render :show, status: :created, location: @order }
+    #   else
+    #     format.html { render :new }
+    #     format.json { render json: @order.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /orders/1

@@ -30,6 +30,17 @@
     <%= form.label :cat_id %>
     <%= form.number_field :cat_id %>
   </div>
+  <div class="field">
+    <%= form.label :Friends %>
+    <select value="" name="order_friends[]" id="order_friends" multiple='multiple'>
+      <option>Select Friend</option>
+      <%for myFriend in @friends%>
+        <option value=<%=myFriend.friend_id%>>
+          <%= myFriend.friend.email%>
+        </option>
+      <% end %>
+    </select>
+  </div>
   <div class="actions">
     <%= form.submit %>
   </div>
