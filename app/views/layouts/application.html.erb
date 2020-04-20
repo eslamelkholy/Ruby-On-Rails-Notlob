@@ -34,10 +34,28 @@
             </ul>
         </div>
         <ul class="navbar-nav mr-auto">
+            <li class="nav-item active" id="Notification" >
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <!-- Single button -->
+                        <div class="btn-group pull-right top-head-dropdown">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Notification <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li>
+                            <a href="#" class="top-text-block">
+                                <div class="top-text-heading">You have <b>3 new themes</b> trending</div>
+                                <div class="top-text-light">15 minutes ago</div>
+                            </a> 
+                            </li>
+                        </ul>
+                        </div>
+                    </div>
+                </div>
+            </li>
             <li class="nav-item active" id="logoutList" >
-              
                   <%= link_to 'Logout', destroy_user_session_path, method: :delete ,:class => "btn btn-danger"%>
-              
             </li>
         </ul>
     </nav> 
