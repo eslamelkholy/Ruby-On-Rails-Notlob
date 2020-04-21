@@ -27,11 +27,11 @@ class OrdersController < ApplicationController
   def create
     @order = current_user.orders.build(order_params)
     @order.save
-    print "Paraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaams"
     @users = User.where(id: params[:order_friends])
     @users.each do |friend|
-      @order_friend = OrderFriend.new(:order_id => @order.id, :user_id => friend.id)
-      @order_friend.save
+      NotificationChannel.broadcast_to(friend, test: 'foo')
+      # @order_friend = OrderFriend.new(:order_id => @order.id, :user_id => friend.id)
+      # @order_friend.save
     end
     # respond_to do |format|
     #   if @order.save
