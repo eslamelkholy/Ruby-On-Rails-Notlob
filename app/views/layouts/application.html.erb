@@ -40,15 +40,17 @@
                         <!-- Single button -->
                         <div class="btn-group pull-right top-head-dropdown">
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Notification <span class="caret"></span>
+                            Notification <span class="caret badge badge-danger">0</span>
                         </button>
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            <li>
-                            <a href="#" class="top-text-block">
-                                <div class="top-text-heading">You have <b>3 new themes</b> trending</div>
-                                <div class="top-text-light">15 minutes ago</div>
-                            </a> 
-                            </li>
+                        <ul id="NotificationList" class="dropdown-menu dropdown-menu-right">
+                            <% for notification in @my_notifications %>
+                                <li>
+                                <a href="#" class="top-text-block">
+                                    <div class="top-text-heading"><b><%= notification.order.user.email%></b> invited You to Have a <%= notification.order.order_type%></div>
+                                    <div class="top-text-light"><%= notification.created_at.strftime("%Y-%m-%d: %I:%M %p")%></div>
+                                </a> 
+                                </li>
+                            <% end %>
                         </ul>
                         </div>
                     </div>

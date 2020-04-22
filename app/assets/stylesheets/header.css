@@ -72,3 +72,7 @@ a{
 #Notification{
     margin-right: 10px;
 }
+.caret{
+  margin-right: -3px;
+  margin-left: 3px;
+}

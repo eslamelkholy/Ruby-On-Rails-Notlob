@@ -10,7 +10,17 @@ consumer.subscriptions.create("NotificationChannel", {
   },
 
   received(data) {
-    console.log("hii");
-    console.log(data);
+    console.log("The Sender is = " + data.sender);
+    console.log("The Type is = " + data.type);
+    var date = new Date();
+    var myDate = date.toLocaleTimeString([], {timeStyle: 'short'});
+    $(".caret").text(parseInt($(".caret").text()) + 1);
+    let myNoti = '<li>'+
+      '<a href="#" class="top-text-block">'+
+        '<div class="top-text-heading"><b>'+ data.sender +'</b> invited You to Have a '+ data.type +'</div>'+
+        '<div class="top-text-light">Today ' + myDate + '</div>'+
+      '</a>'+
+    '</li>';
+    $("#NotificationList").append(myNoti);
   }
 });
