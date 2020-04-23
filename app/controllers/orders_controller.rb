@@ -63,12 +63,7 @@ class OrdersController < ApplicationController
       format.json { head :no_content }
     end
   end
-  def upload
-      uploaded_file = params[:picture]
-      File.open(Rails.root.join('public', 'uploads', uploaded_file.original_filename), 'wb') do |file|
-        file.write(uploaded_file.read)
-      end
-    end
+
   private
     # Send Notifications To User
     def send_notifications(friends, order)
@@ -85,6 +80,6 @@ class OrdersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def order_params
-      params.require(:order).permit(:order_type, :restaurant_id, :order_friends[], :picture)
+      params.require(:order).permit(:order_type, :state, :restaurant_id, :cat_id)
     end
 end
