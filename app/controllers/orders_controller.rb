@@ -27,17 +27,21 @@ class OrdersController < ApplicationController
   def create
     @order = current_user.orders.build(order_params)
     @order.save
-    @friends = User.where(id: params[:order_friends])
-    send_notifications(@friends, @order)
-    respond_to do |format|
-      if @order.save
-        format.html { redirect_to @order, notice: 'Order was successfully created.' }
-        format.json { render :show, status: :created, location: @order }
-      else
-        format.html { render :new }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
-      end
+    print "Paraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaams"
+    @users = User.where(id: params[:order_friends])
+    @users.each do |friend|
+      @order_friend = OrderFriend.new(:order_id => @order.id, :user_id => friend.id)
+      @order_friend.save
     end
+    # respond_to do |format|
+    #   if @order.save
+    #     format.html { redirect_to @order, notice: 'Order was successfully created.' }
+    #     format.json { render :show, status: :created, location: @order }
+    #   else
+    #     format.html { render :new }
+    #     format.json { render json: @order.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /orders/1
@@ -63,16 +67,14 @@ class OrdersController < ApplicationController
       format.json { head :no_content }
     end
   end
-
-  private
-    # Send Notifications To User
-    def send_notifications(friends, order)
-      friends.each do |friend|
-        NotificationChannel.broadcast_to(friend, sender: current_user.email, type: order.order_type)
-        @order_friend = OrderFriend.new(:order_id => order.id, :user_id => friend.id)
-        @order_friend.save
+  def upload
+      uploaded_file = params[:picture]
+      File.open(Rails.root.join('public', 'uploads', uploaded_file.original_filename), 'wb') do |file|
+        file.write(uploaded_file.read)
       end
     end
+
+  private
     # Use callbacks to share common setup or constraints between actions.
     def set_order
       @order = Order.find(params[:id])
@@ -80,6 +82,7 @@ class OrdersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def order_params
-      params.require(:order).permit(:order_type, :state, :restaurant_id, :cat_id)
+      params.require(:order).permit(:order_type, :restaurant_id, :order_friends[] :picture)
     end
+    
 end

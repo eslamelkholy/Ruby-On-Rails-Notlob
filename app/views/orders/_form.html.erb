@@ -12,24 +12,15 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :type %>
-    <%= form.text_field :order_type %>
-  </div>
-
-  <div class="field">
-    <%= form.label :state %>
-    <%= form.text_field :state %>
+    <%= form.label :Order_for %>
+    <%= form.select :order_type, options_for_select(["Breakfast", "Launch", "Dinner"]) %>
   </div>
 
   <div class="field">
     <%= form.label :restaurant_id %>
-    <%= form.number_field :restaurant_id %>
+    <%= form.select :restaurant_id, options_for_select(["Elmohamady", "Elbrens", "Sobhy"]) %>
   </div>
 
-  <div class="field">
-    <%= form.label :cat_id %>
-    <%= form.number_field :cat_id %>
-  </div>
   <div class="field">
     <%= form.label :Friends %>
     <select value="" name="order_friends[]" id="order_friends" multiple='multiple'>
@@ -40,6 +31,10 @@
         </option>
       <% end %>
     </select>
+  </div>
+  <div class="field">
+    <%= form.label :Menu_Image %>
+    <%= file_field_tag 'picture' %>
   </div>
   <div class="actions">
     <%= form.submit %>
