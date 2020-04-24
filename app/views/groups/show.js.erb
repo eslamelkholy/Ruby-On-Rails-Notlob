@@ -1,0 +1,3 @@
+$("#friendsList").empty();
+console.log("gggggggg");
+$("#friendsList").html("<%= escape_javascript(render partial: 'groups/listFriends', locals: { group_friends: @group_friends } ) %>");

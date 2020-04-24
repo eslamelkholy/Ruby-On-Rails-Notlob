@@ -1,5 +1,4 @@
 class GroupFriendsController < ApplicationController
-  before_action :set_group_friend, only: [:show, :edit, :update, :destroy]
 
   # GET /group_friends
   # GET /group_friends.json
@@ -25,7 +24,6 @@ class GroupFriendsController < ApplicationController
   # POST /group_friends.json
   def create
     @group_friend = GroupFriend.new(group_friend_params)
-
     respond_to do |format|
       if @group_friend.save
         format.html { redirect_to @group_friend, notice: 'Group friend was successfully created.' }
@@ -54,13 +52,13 @@ class GroupFriendsController < ApplicationController
   # DELETE /group_friends/1
   # DELETE /group_friends/1.json
   def destroy
+    @group_friend = GroupFriend.find(params[:id])
     @group_friend.destroy
     respond_to do |format|
-      format.html { redirect_to group_friends_url, notice: 'Group friend was successfully destroyed.' }
+      format.html { redirect_to groups_url, notice: 'Group friend was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_group_friend

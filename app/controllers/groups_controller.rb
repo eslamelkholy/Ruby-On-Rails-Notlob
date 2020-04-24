@@ -4,12 +4,18 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-    @groups = Group.all
+    @groups = Group.where(user_id: current_user.id)
+    @first_group = @groups.first()
+    @group_friends = GroupFriend.where(group_id: @first_group.id)
   end
 
   # GET /groups/1
   # GET /groups/1.json
   def show
+    @group_friends = GroupFriend.where(group_id: @group.id)
+    respond_to do |format|
+      format.js {render layout: false}
+    end
   end
 
   # GET /groups/new
@@ -24,7 +30,7 @@ class GroupsController < ApplicationController
   # POST /groups
   # POST /groups.json
   def create
-    @group = current_user.groups.build(name: params[:name])
+    @group = current_user.groups.build(name: params[:name], user_id: current_user.id)
 
     respond_to do |format|
       if @group.save
@@ -60,7 +66,6 @@ class GroupsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_group

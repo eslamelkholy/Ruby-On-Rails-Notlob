@@ -1,0 +1,8 @@
+<ul class="list-group">
+    <% for friend in @group_friends %>
+        <li class="list-group-item">
+        <strong><%= friend.user.email%></strong>
+        <%= link_to "Remove", group_friend_path(friend), :method => :delete,class: "btn btn-danger controllers" %>
+        </li>
+    <% end %>
+</ul>

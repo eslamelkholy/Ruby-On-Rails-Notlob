@@ -34,6 +34,7 @@
         <li class="list-group-item groups">
           <strong class="groupsName"><%= group.name %></strong>
           <%= link_to 'X', group, method: :delete, data: { confirm: 'Are you Sure you want to Delete this Group?' },class: "btn btn-danger controllers" %>
+          <%= link_to 'Show', group_path(group), remote: true,class: "btn btn-info controllers" %>
         </li>
         <% end %>
       </ul>
@@ -42,6 +43,7 @@
     <div class="panel-body col-8">
       <h2>Friends List</h2>
       <div class="myBorder">
+      
         <%= form_tag(friendships_add_friend_by_name_path, method: "post",class: "form-inline") do %>
       <div class="col-auto my-4">
             <label>
@@ -53,15 +55,16 @@
           <%= submit_tag("Add Friend",class: "btn btn-success") %>
         </div>
       <% end %>
-      <ul class="list-group">
-        <% for friendship in current_user.friendships %>
-        <li class="list-group-item">
-          <strong><%= friendship.friend.email%></strong>
-          <%= link_to "Remove", friendship, :method => :delete,class: "btn btn-danger controllers" %>
-        </li>
-        <% end %>
-        </li>
-      </ul>
+        <div id="friendsList">
+            <ul class="list-group">
+              <% for friend in @group_friends %>
+              <li class="list-group-item">
+                <strong><%= friend.user.email%></strong>
+                <%= link_to "Remove", group_friend_path(friend), :method => :delete,class: "btn btn-danger controllers" %>
+              </li>
+              <% end %>
+          </ul>
+        </div>
       </div>
     </div>
 
