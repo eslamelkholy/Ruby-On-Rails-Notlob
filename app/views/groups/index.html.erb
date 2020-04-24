@@ -45,10 +45,10 @@
         <%= form_tag(friendships_add_friend_by_name_path, method: "post",class: "form-inline") do %>
       <div class="col-auto my-4">
             <label>
-              Enter Your Group Name
+              Enter Your Friend Name
             </label>
       </div>
-        <%= text_field_tag(:user_email, "", class: "form-control col-5", placeholder: 'e.g OS Track')%>
+        <%= text_field_tag(:user_email, "", class: "form-control col-5")%>
         <div class="col-auto my-1">
           <%= submit_tag("Add Friend",class: "btn btn-success") %>
         </div>
