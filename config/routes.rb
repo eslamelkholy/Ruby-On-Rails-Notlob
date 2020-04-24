@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :group_friends
   resources :groups
   resources :order_friends
   resources :orders

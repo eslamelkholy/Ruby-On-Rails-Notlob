@@ -7,6 +7,10 @@ class User < ApplicationRecord
   has_many :friendships
   has_many :friends, :through => :friendships
   has_many :groups
+
+  has_many :group_friends
+  has_many :groups, through: :group_friends
+  
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 end

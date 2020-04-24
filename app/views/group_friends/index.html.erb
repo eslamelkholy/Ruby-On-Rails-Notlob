@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Group Friends</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Group</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @group_friends.each do |group_friend| %>
+      <tr>
+        <td><%= group_friend.group_id %></td>
+        <td><%= group_friend.user_id %></td>
+        <td><%= link_to 'Show', group_friend %></td>
+        <td><%= link_to 'Edit', edit_group_friend_path(group_friend) %></td>
+        <td><%= link_to 'Destroy', group_friend, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Group Friend', new_group_friend_path %>
