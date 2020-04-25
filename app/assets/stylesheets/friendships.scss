@@ -1,3 +1,20 @@
 // Place all the styles related to the friendships controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.list-group{
+    max-height: 600px;
+    margin-bottom: 10px;
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
+}
+h1{
+    margin-top: 30px;
+    color: dodgerblue;
+    margin-left: -50px;
+}
+.row{
+    margin-top: 55px;
+}
+.controllers{
+    float: right;
+}

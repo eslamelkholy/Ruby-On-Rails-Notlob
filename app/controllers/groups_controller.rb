@@ -6,7 +6,9 @@ class GroupsController < ApplicationController
   def index
     @groups = Group.where(user_id: current_user.id)
     @first_group = @groups.first()
-    @group_friends = GroupFriend.where(group_id: @first_group.id)
+    if @first_group
+      @group_friends = GroupFriend.where(group_id: @first_group.id)
+    end
   end
 
   # GET /groups/1

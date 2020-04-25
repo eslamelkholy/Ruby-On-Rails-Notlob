@@ -58,12 +58,19 @@
       <% end %>
         <div id="friendsList">
             <ul class="list-group">
+            <% if @group_friends%>
               <% for friend in @group_friends %>
               <li class="list-group-item">
                 <strong><%= friend.user.email%></strong>
                 <%= link_to "Remove", group_friend_path(friend), :method => :delete,class: "btn btn-danger controllers" %>
               </li>
               <% end %>
+            <% else %>
+              <li class="list-group-item">
+                <strong>Sorry There isn't Any Friend Yet</strong>
+              </li>
+            <% end %>
+              
           </ul>
         </div>
       </div>
