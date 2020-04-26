@@ -42,7 +42,7 @@
                   <div class="input-group-prepend">
                     <label class="input-group-text" for="inputGroupSelect03">Friends</label>
                   </div>
-                  <select value="" name="order_friends[]" class="custom-select" id="inputGroupSelect03" multiple='multiple'>
+                  <select value="" name="order_friends" class="custom-select" id="inputGroupSelect03" multiple='multiple'>
                     <option>Select Friend</option>
                     <%for myFriend in @friends%>
                       <option value=<%=myFriend.friend_id%>>

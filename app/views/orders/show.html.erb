@@ -29,7 +29,9 @@
                 </div>
                 <div class="input-group mb-3">
                   <p>Friends:</p>
-                  <%= @order.order_friends %>
+                  <%for myFriend in @order.order_friends%>
+                    <%=myFriend.user.email%>
+                  <% end %>
                 </div>
                 <div class="input-group mb-3">
                   <p>Menu Image:</p>
