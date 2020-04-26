@@ -1,29 +1,20 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Type:</strong>
+<div>
+  <strong>Order For:</strong>
   <%= @order.order_type %>
-</p>
+</div>
 
-<p>
-  <strong>State:</strong>
-  <%= @order.state %>
-</p>
 
-<p>
+<div>
   <strong>Restaurant:</strong>
-  <%= @order.restaurant_id %>
-</p>
+  <%= @order.restaurant %>
+</div>
 
-<p>
-  <strong>Cat:</strong>
-  <%= @order.cat_id %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @order.user_id %>
-</p>
+<div>
+  <strong>Menu Image:</strong>
+  <%= image_tag(@order.picture,:class => "image",style: 'width:400px;height:auto') if @order.picture.attached? %>
+</div>
 
 <%= link_to 'Edit', edit_order_path(@order) %> |
 <%= link_to 'Back', orders_path %>

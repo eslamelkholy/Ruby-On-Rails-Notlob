@@ -3,9 +3,10 @@ class CreateOrders < ActiveRecord::Migration[6.0]
     create_table :orders do |t|
       t.string :type
       t.string :state
-      t.integer :restaurant_id
+      t.string :restaurant
       t.integer :cat_id
       t.integer :user_id
+      t.blob :picture
 
       t.timestamps
     end

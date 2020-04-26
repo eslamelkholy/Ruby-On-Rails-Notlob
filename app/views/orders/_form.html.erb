@@ -1,42 +1,72 @@
-<%= form_with(model: order, local: true) do |form| %>
-  <% if order.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
+<!DOCTYPE html>
+  <html lang="en">
 
-      <ul>
-        <% order.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+  <head>
+      <!-- Title Page-->
+      <title>Add Order</title>
+      <%= stylesheet_link_tag "main" %>
+  </head>
+
+  <body>
+    <div class="page-wrapper bg-red p-t-180 p-b-100 font-robo">
+      <div class="wrapper wrapper--w960">
+        <div class="card card-2">
+          <div class="card-heading"></div>
+            <div class="card-body">
+              <h2 class="title">Add Order</h2>
+              <%= form_with(model: order, local: true) do |form| %>
+                <% if order.errors.any? %>
+                  <div id="error_explanation">
+                    <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
+          
+                    <ul>
+                      <% order.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                      <% end %>
+                    </ul>
+                  </div>
+                <% end %>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Order For</label>
+                  </div>
+                  <%= form.select :order_type, [["Breakfast", "Breakfast"], ["Launch", "Launch"], ["Dinner", "Dinner"]], {}, {class: "custom-select",id: "inputGroupSelect01"} %>
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect02">Restaurant</label>
+                  </div>
+                  <%= form.select :restaurant, [["Elmohamady", "Elmohamady"], ["Elbrens", "Elbrens"], ["Sobhy", "Sobhy"]], {}, {class: "custom-select",id: "inputGroupSelect02"} %>
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect03">Friends</label>
+                  </div>
+                  <select value="" name="order_friends[]" class="custom-select" id="inputGroupSelect03" multiple='multiple'>
+                    <option>Select Friend</option>
+                    <%for myFriend in @friends%>
+                      <option value=<%=myFriend.friend_id%>>
+                        <%= myFriend.friend.email%>
+                      </option>
+                    <% end %>
+                  </select>
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Upload</span>
+                  </div>
+                  <div class="custom-file">
+                    <%= form.file_field :picture,class:"custom-file-input" ,id:"inputGroupFile04" %>
+                    <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
+                  </div>
+                </div>
+                <div class="actions">
+                  <%= form.submit class:'btn btn-success'%>
+                </div>
+              <% end %>
+          </div>
+        </div>
+      </div>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :Order_for %>
-    <%= form.select :order_type, options_for_select(["Breakfast", "Launch", "Dinner"]) %>
-  </div>
-
-  <div class="field">
-    <%= form.label :restaurant_id %>
-    <%= form.select :restaurant_id, options_for_select(["Elmohamady", "Elbrens", "Sobhy"]) %>
-  </div>
-
-  <div class="field">
-    <%= form.label :Friends %>
-    <select value="" name="order_friends[]" id="order_friends" multiple='multiple'>
-      <option>Select Friend</option>
-      <%for myFriend in @friends%>
-        <option value=<%=myFriend.friend_id%>>
-          <%= myFriend.friend.email%>
-        </option>
-      <% end %>
-    </select>
-  </div>
-  <div class="field">
-    <%= form.label :Menu_Image %>
-    <%= file_field_tag 'picture' %>
-  </div>
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+  </body>
+</html>
