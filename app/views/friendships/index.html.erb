@@ -26,16 +26,18 @@
     <% end %>
 <% end %>
   <div class="row">
-    <div class="panel-body col-6">
+    <div class="panel-body col-5">
       <h2>Users List</h2>
       <ul class="list-group">
         <% for user in @users %>
-        <li class="list-group-item">
-          <strong><%= user.email %></strong>
-          <% if !current_user.friends.include? user  %>
-          <%= link_to "Add Friend",friendships_path(:friend_id => user), :method => :post,class: "btn btn-info controllers" %>
+          <% if user.id != current_user.id%>
+            <li class="list-group-item">
+            <strong><%= user.email %></strong>
+            <% if !current_user.friends.include? user  %>
+            <%= link_to "Add Friend",friendships_path(:friend_id => user), :method => :post,class: "btn btn-info controllers addFriend" %>
+            <% end %>
+          </li>
           <% end %>
-        </li>
         <% end %>
       </ul>
     </div>

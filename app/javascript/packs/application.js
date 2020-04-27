@@ -22,3 +22,9 @@ global.$ = jQuery;
 //= require bootstrap
 //= require bootstrap-sprockets
 //= require_tree .
+
+$(function(){
+    $("#userNotification").click(()=>{
+        
+    })
+})
