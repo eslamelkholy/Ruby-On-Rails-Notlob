@@ -19,10 +19,6 @@
       <div class="alert alert-success col-6">
         <%= msg %>
       </div>
-    <% else %>
-    <div class="alert alert-danger col-4">
-        <%= msg %>
-      </div>
     <% end %>
 <% end %>
   <div class="row">
@@ -45,13 +41,14 @@
       <h2>Friends List</h2>
       <div class="myBorder">
       
-        <%= form_tag(friendships_add_friend_by_name_path, method: "post",class: "form-inline") do %>
+        <%= form_tag(group_friends_path, method: "post",class: "form-inline") do %>
       <div class="col-auto my-4">
             <label>
               Enter Your Friend Name
             </label>
       </div>
         <%= text_field_tag(:user_email, "", class: "form-control col-5")%>
+        <%= hidden_field_tag(:group_id, @groups[0].id)%>
         <div class="col-auto my-1">
           <%= submit_tag("Add Friend",class: "btn btn-success") %>
         </div>

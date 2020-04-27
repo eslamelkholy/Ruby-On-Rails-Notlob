@@ -1,3 +1,3 @@
 $("#friendsList").empty();
-console.log("gggggggg");
+$("#group_id").val("<%=@group.id%>");
 $("#friendsList").html("<%= escape_javascript(render partial: 'groups/listFriends', locals: { group_friends: @group_friends } ) %>");
