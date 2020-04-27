@@ -22,3 +22,17 @@ global.$ = jQuery;
 //= require bootstrap
 //= require bootstrap-sprockets
 //= require_tree .
+
+$(function () {
+  $("#userNotification").click(() => {
+    $.ajax({
+      url: "order_friends/notifications_seen",
+      type: "POST",
+      data: { name: "hi" },
+      success: function (data) {
+        console.log(data);
+        $("#NumbersOfNotification").text("0");
+      },
+    });
+  });
+});
