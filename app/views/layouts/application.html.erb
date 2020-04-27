@@ -40,7 +40,7 @@
                         <!-- Single button -->
                         <div class="btn-group pull-right top-head-dropdown">
                         <button type="button" id="userNotification" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Notification <span class="caret badge badge-danger"><%=@numbers_of_unseen_notifications%></span>
+                            Notification <span class="caret badge badge-danger" id="NumbersOfNotification"><%=@numbers_of_unseen_notifications%></span>
                         </button>
                         <ul id="NotificationList" class="dropdown-menu dropdown-menu-right">
                             <% for notification in @my_notifications %>
