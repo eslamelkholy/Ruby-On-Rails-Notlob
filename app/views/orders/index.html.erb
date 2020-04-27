@@ -1,31 +1,74 @@
-<p id="notice"><%= notice %></p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Orders</title>
+  <%= stylesheet_link_tag "main2" %>
+  <%= stylesheet_link_tag "util" %>
+</head>
+<body>
+<div class="h1" style="background-color:lightskyblue;color:white;text-align:center">Orders</div>
 
-<h1>Orders</h1>
+	<div class="limiter">
+		<div class="container-table100">
+			<div class="wrap-table100">
+					<div class="table">
 
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Restaurant</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+						<div class="row header">
+							<div class="cell">
+								Order ID
+							</div>
+							<div class="cell">
+								Ordered For
+							</div>
+							<div class="cell">
+								Restaurant
+							</div>
+							<div class="cell">
+								User
+							</div>
+							<div class="cell">
+								Show
+							</div>
+							<div class="cell">
+								Edit
+							</div>
+							<div class="cell">
+								Delete
+							</div>
+										
+						</div>
+						<% @orders.each do |order| %>
+							<div class="row">
+								<div class="cell" data-title="Order ID">
+									<%= order.id %>
+								</div>
+								<div class="cell" data-title="Ordered For">
+									<%= order.order_type %>
+								</div>
+								<div class="cell" data-title="Restaurant">
+									<%= order.restaurant %>
+								</div>
+								<div class="cell" data-title="User">
+									<%= order.user.email %>
+								</div>
+								<div class="cell" data-title="Show">
+									<%= link_to 'Show', order %>
+								</div>
+								<div class="cell" data-title="Edit">
+									<%= link_to 'Edit', edit_order_path(order) %>
+								</div>
+								<div class="cell" data-title="Delete">
+									<%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %>
+								</div>
+							</div>
+						<% end %>
+					</div>
+			</div>
+		</div>
+  </div>
+  <div class="h1" style="background-color:lightskyblue;text-align:center">
+    <%= link_to 'New Order', new_order_path ,:style=>'color: white;'%>
+  </div>
 
-  <tbody>
-    <% @orders.each do |order| %>
-      <tr>
-        <td><%= order.order_type %></td>
-        <td><%= order.restaurant %></td>
-        <td><%= order.user.email %></td>
-        <td><%= link_to 'Show', order %></td>
-        <td><%= link_to 'Edit', edit_order_path(order) %></td>
-        <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Order', new_order_path %>
+</body>
+</html>
