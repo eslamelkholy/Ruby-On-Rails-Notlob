@@ -10,16 +10,20 @@ class OrdersController < ApplicationController
   # GET /orders/1
   # GET /orders/1.json
   def show
+    @groupFriends = GroupFriend.where(group_id: params[:order_groups])
   end
 
   # GET /orders/new
   def new
     @order = Order.new
     @friends = Friendship.where(user_id: current_user.id)
+    @groups = Group.where(user_id: current_user.id)
   end
 
   # GET /orders/1/edit
   def edit
+    @friends = Friendship.where(user_id: current_user.id)
+    @groups = Group.where(user_id: current_user.id)
   end
 
   # POST /orders
@@ -28,6 +32,8 @@ class OrdersController < ApplicationController
     @order = current_user.orders.build(order_params)
     @order.save
     @friends = User.where(id: params[:order_friends])
+    @groupFriends = GroupFriend.where(group_id: params[:order_groups])
+    add_group_friends(@groupFriends, @order)
     send_notifications(@friends, @order)
     respond_to do |format|
       if @order.save
@@ -70,6 +76,12 @@ class OrdersController < ApplicationController
       friends.each do |friend|
         NotificationChannel.broadcast_to(friend, sender: current_user.email, type: order.order_type)
         @order_friend = OrderFriend.new(:order_id => order.id, :user_id => friend.id)
+        @order_friend.save
+      end
+    end
+    def add_group_friends(groupFriends, order)
+      groupFriends.each do |friend|
+        @order_friend = OrderFriend.new(:order_id => order.id, :user_id => friend.user_id)
         @order_friend.save
       end
     end

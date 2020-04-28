@@ -1,9 +1,49 @@
-<div class="container">
-    <h1>Welcome#index</h1>
-    <p>Find me in app/views/welcome/index.html.erb</p>
-
-    <div class="alert alert-success">
-        Bootstrap Test
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+      <div class="alert alert-danger" role="alert">
+      Last Order
     </div>
-    <a class="btn btn-danger">Test</a>
+
+        <div class="dbdata">
+                    
+                  <% @orderAll.each do |oderuser| %>
+                  
+                        <p>
+                                <%= oderuser.order_type %>
+                                : Order at 
+                              <%= oderuser.created_at.strftime("%m/%d/%Y")%>
+                                
+                        </p>   
+                        
+                  <% end %>
+                  
+                  </div>
+                
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+      <div class="alert alert-danger" role="alert">
+      Friends Activity
+    </div>
+
+      <div class="dbdata">
+      <% @friendsOrders.each do |oderuser| %>
+          
+        <p>
+                <%= oderuser.user.email %>
+                : Has Created An Order From
+                <%= oderuser.restaurant%>
+                
+        </p>   
+        
+        <% end %>
+      </div>
+      </div>
+    </div>
+  </div>
 </div>

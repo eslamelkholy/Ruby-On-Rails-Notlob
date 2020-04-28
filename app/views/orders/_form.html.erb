@@ -43,10 +43,23 @@
                     <label class="input-group-text" for="inputGroupSelect03">Friends</label>
                   </div>
                   <select value="" name="order_friends" class="custom-select" id="inputGroupSelect03" multiple='multiple'>
-                    <option>Select Friend</option>
+                    <option disabled>Friends</option>
                     <%for myFriend in @friends%>
                       <option value=<%=myFriend.friend_id%>>
                         <%= myFriend.friend.email%>
+                      </option>
+                    <% end %>
+                  </select>
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                      <label class="input-group-text" for="inputGroupSelect05">Groups</label>
+                  </div>
+                  <select value="" name="order_groups" class="custom-select" id="inputGroupSelect05" multiple='multiple'>
+                    <option disabled>Groups</option>
+                    <%for myGroup in @groups%>
+                      <option value=<%=myGroup.id%>>
+                        <%= myGroup.name%>
                       </option>
                     <% end %>
                   </select>
