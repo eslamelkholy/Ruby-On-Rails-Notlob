@@ -26,14 +26,20 @@
       <h2>Groups List</h2>
       <div>
         <ul class="list-group myBorder">
-        <% for group in @groups %>
-        <li class="list-group-item groups">
-          <strong class="groupsName"><%= group.name %></strong>
-          <%= link_to 'X', group, method: :delete, data: { confirm: 'Are you Sure you want to Delete this Group?' },class: "btn btn-danger controllers" %>
-          <%= link_to 'Show', group_path(group), remote: true,class: "btn btn-info controllers" %>
-        </li>
-        
-        <% end %>
+        <%if @groups.empty? %>
+          <li class="list-group-item groups">
+          <strong> There is no Groups Yet</strong>
+          </li>
+
+        <% else%>
+          <% for group in @groups %>
+          <li class="list-group-item groups">
+            <strong class="groupsName"><%= group.name %></strong>
+            <%= link_to 'X', group, method: :delete, data: { confirm: 'Are you Sure you want to Delete this Group?' },class: "btn btn-danger controllers" %>
+            <%= link_to 'Show', group_path(group), remote: true,class: "btn btn-info controllers" %>
+          </li>
+          <% end %>
+      <%end%>
       </ul>
       </div>
     </div>
@@ -48,7 +54,9 @@
             </label>
       </div>
         <%= text_field_tag(:user_email, "", class: "form-control col-5")%>
-        <%= hidden_field_tag(:group_id, @groups[0].id)%>
+        <% if @groups[0]%>
+          <%= hidden_field_tag(:group_id, @groups[0].id)%>  
+        <% end %>
         <div class="col-auto my-1">
           <%= submit_tag("Add Friend",class: "btn btn-success") %>
         </div>
@@ -67,7 +75,18 @@
                 <strong>Sorry There isn't Any Friend Yet</strong>
               </li>
             <% end %>
-              
+              <% flash.each do |type, msg| %>
+                <% if msg == "Please Select Specified Group" %>
+                  <div class="alert alert-danger col-6">
+                    <%= msg %>
+                  </div>
+                <% end %>
+                <% if msg == "Sorry this User Does Not Exist" %>
+                  <div class="alert alert-success col-6">
+                    <%= msg %>
+                  </div>
+                <% end %>
+            <% end %>
           </ul>
         </div>
       </div>

@@ -24,14 +24,19 @@ class GroupFriendsController < ApplicationController
   # POST /group_friends.json
   def create
     @added_user_to_group = User.find_by(email: params[:user_email])
-    @group = Group.find(params[:group_id])
+    # @group = Group.find(params[:group_id])
     respond_to do |format|
+      if params[:group_id].present?
+        @group = Group.find(params[:group_id])
+      else
+        format.html { redirect_to groups_path, notice: 'Please Select Specified Group' }
+      end
       if @added_user_to_group
         @add_new_user_to_group = GroupFriend.new(:group_id => @group.id, :user_id => @added_user_to_group.id)
         @add_new_user_to_group.save
         format.html { redirect_to groups_path, notice: 'User added Successfully' }
       else
-        format.html { redirect_to @group_friend, notice: 'Sorry this User Does Not Exist' }
+        format.html { redirect_to groups_path, notice: 'Sorry this User Does Not Exist' }
       end
     end
   end
