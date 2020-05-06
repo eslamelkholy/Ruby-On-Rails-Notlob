@@ -57,3 +57,5 @@ gem 'devise'
 gem 'bootstrap', '~> 4.4.1'
 # gem jquery
 gem 'jquery-rails'
+gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
