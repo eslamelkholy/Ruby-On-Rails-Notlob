@@ -4,7 +4,8 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.all
+    @order_id=OrderFriend.where(user_id:current_user.id)
+    @orders = Order.where(user_id: current_user.id).or(Order.where(id:@order_id))
   end
 
   # GET /orders/1

@@ -39,16 +39,18 @@
           </div>
 
             <div class="dbdata">
-            <% @friendsOrders.each do |oderuser| %>
-                
-              <p>
-                      <%= oderuser.user.email %>
-                      : Has Created An Order From
-                      <%= oderuser.restaurant%>
-                      
-              </p>   
-              
+            <% @friendsOrders.each do |orderuser| %>
+              <% orderuser.each do |oderuser| %>
+                <p>
+                        <%= oderuser.user.email %>
+                        : Has Created An Order From
+                        <%= oderuser.restaurant%>
+                        
+                </p>
+                 
               <% end %>
+            <% end %>
+            
             </div>
             </div>
           </div>
