@@ -12,7 +12,7 @@ class User < ApplicationRecord
   has_many :groups, through: :group_friends
   
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,:omniauthable, :omniauth_providers => [:facebook,:google_oauth2]
+         :recoverable, :rememberable, :validatable,:omniauthable, :omniauth_providers => [:facebook,:google]
   
          def self.new_with_session(params, session)
           super.tap do |user|

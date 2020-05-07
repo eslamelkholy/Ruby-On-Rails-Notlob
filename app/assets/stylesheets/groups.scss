@@ -1,31 +1,33 @@
 // Place all the styles related to the groups controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
-.list-group{
-    max-height: 600px;
-    margin-bottom: 10px;
-    overflow:scroll;
-    -webkit-overflow-scrolling: touch;
+#bodycontainer {
+  background: #fa4251;
+  height: 800px;
+  width: 100%;
 }
-h1{
-    margin-top: 30px;
-    color: dodgerblue;
-    margin-left: -50px;
+.list-group {
+  max-height: 600px;
+  margin-bottom: 10px;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
 }
-.row{
-    margin-top: 55px;
+h1 {
+  margin-top: 30px;
+  color: dodgerblue;
+  margin-left: -50px;
 }
-.controllers{
-    float: right;
-    margin-right: 5px;
+.row {
+  margin-top: 55px;
 }
-.myBorder{
-    border: 2px solid black;
-    height: 400px;
+.controllers {
+  float: right;
+  margin-right: 5px;
 }
-.groups:first-child{
-    margin-top: 30px;
+
+.groups:first-child {
+  margin-top: 30px;
 }
-.groupsName{
-    margin-left: 40px;
+.groupsName {
+  margin-left: 40px;
 }
