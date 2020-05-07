@@ -1,96 +1,108 @@
-<%= stylesheet_link_tag "groups" %>
-<div class="container">
-  <h1>
-    Groups Page
-  </h1>
-  <%= form_tag(groups_path, method: "post",class: "form-inline") do %>
-  <div class="col-auto my-4">
-        <label>
-          Enter Your Group Name
-        </label>
+<html>
+  <head>
+    <%= stylesheet_link_tag "groups" %>
+  </head>
+  <div class="h1" style="background-color:lightskyblue;text-align:center;">
+    <h1 style="color:white;">
+      Groups Page
+    </h1>
   </div>
-    <%= text_field_tag(:name, "", class: "form-control col-5", placeholder: 'e.g OS Track')%>
-    <div class="col-auto my-1">
-      <%= submit_tag("Add Group",class: "btn btn-success") %>
-    </div>
-  <% end %>
-  <% flash.each do |type, msg| %>
-    <% if msg == "Group was successfully created." %>
-      <div class="alert alert-success col-6">
-        <%= msg %>
-      </div>
-    <% end %>
-<% end %>
-  <div class="row">
-    <div class="panel-body col-4">
-      <h2>Groups List</h2>
-      <div>
-        <ul class="list-group myBorder">
-        <%if @groups.empty? %>
-          <li class="list-group-item groups">
-          <strong> There is no Groups Yet</strong>
-          </li>
-
-        <% else%>
-          <% for group in @groups %>
-          <li class="list-group-item groups">
-            <strong class="groupsName"><%= group.name %></strong>
-            <%= link_to 'X', group, method: :delete, data: { confirm: 'Are you Sure you want to Delete this Group?' },class: "btn btn-danger controllers" %>
-            <%= link_to 'Show', group_path(group), remote: true,class: "btn btn-info controllers" %>
-          </li>
-          <% end %>
-      <%end%>
-      </ul>
-      </div>
-    </div>
-    <div class="panel-body col-8">
-      <h2>Friends List</h2>
-      <div class="myBorder">
-      
-        <%= form_tag(group_friends_path, method: "post",class: "form-inline") do %>
-      <div class="col-auto my-4">
-            <label>
-              Enter Your Friend Name
-            </label>
-      </div>
-        <%= text_field_tag(:user_email, "", class: "form-control col-5")%>
-        <% if @groups[0]%>
-          <%= hidden_field_tag(:group_id, @groups[0].id)%>  
+  <body>
+    <div id="bodycontainer">
+      <div class="container">
+        
+        
+        <%= form_tag(groups_path, method: "post",class: "form-inline") do %>
+        <div class="col-auto my-4">
+              <label style="color:white;font-size:25px;">
+                Enter Your Group Name
+              </label>
+        </div>
+          <%= text_field_tag(:name, "", class: "form-control col-5", placeholder: 'e.g OS Track')%>
+          <div class="col-auto my-1">
+            <%= submit_tag("Add Group",class: "btn btn-info") %>
+          </div>
         <% end %>
-        <div class="col-auto my-1">
-          <%= submit_tag("Add Friend",class: "btn btn-success") %>
-        </div>
+        <% flash.each do |type, msg| %>
+          <% if msg == "Group was successfully created." %>
+            <div class="alert alert-success col-6">
+              <%= msg %>
+            </div>
+          <% end %>
       <% end %>
-        <div id="friendsList">
-            <ul class="list-group">
-            <% if @group_friends%>
-              <% for friend in @group_friends %>
-              <li class="list-group-item">
-                <strong><%= friend.user.email%></strong>
-                <%= link_to "Remove", group_friend_path(friend), :method => :delete,class: "btn btn-danger controllers" %>
-              </li>
+        <div class="row">
+          <div class="panel-body col-4">
+            <h2 style="color:white;">Groups List</h2>
+            <div>
+              <ul class="list-group myBorder">
+              <%if @groups.empty? %>
+                <li class="list-group-item groups">
+                <strong style="color:lightskyblue;"> There is no Groups Yet</strong>
+                </li>
+
+              <% else%>
+                <% for group in @groups %>
+                <li class="list-group-item groups">
+                  <strong class="groupsName"><%= group.name %></strong>
+                  <%= link_to 'X', group, method: :delete, data: { confirm: 'Are you Sure you want to Delete this Group?' },class: "btn btn-danger controllers" %>
+                  <%= link_to 'Show', group_path(group), remote: true,class: "btn btn-info controllers" %>
+                </li>
+                <% end %>
+            <%end%>
+            </ul>
+            </div>
+          </div>
+          <div class="panel-body col-8">
+            <h2 style="color:white;">Friends List</h2>
+            <div class="myBorder">
+            
+              <%= form_tag(group_friends_path, method: "post",class: "form-inline") do %>
+            <div class="col-auto my-4">
+                  <label style="color:white;">
+                    Enter Your Friend Name
+                  </label>
+            </div>
+              <%= text_field_tag(:user_email, "", class: "form-control col-5")%>
+              <% if @groups[0]%>
+                <%= hidden_field_tag(:group_id, @groups[0].id)%>  
               <% end %>
-            <% else %>
-              <li class="list-group-item">
-                <strong>Sorry There isn't Any Friend Yet</strong>
-              </li>
+              <div class="col-auto my-1">
+                <%= submit_tag("Add Friend",class: "btn btn-info") %>
+              </div>
             <% end %>
-              <% flash.each do |type, msg| %>
-                <% if msg == "Please Select Specified Group" %>
-                  <div class="alert alert-danger col-6">
-                    <%= msg %>
-                  </div>
-                <% end %>
-                <% if msg == "Sorry this User Does Not Exist" %>
-                  <div class="alert alert-success col-6">
-                    <%= msg %>
-                  </div>
-                <% end %>
-            <% end %>
-          </ul>
+              <div id="friendsList">
+                  <ul class="list-group">
+                  <% if @group_friends%>
+                    <% for friend in @group_friends %>
+                    <li class="list-group-item">
+                      <strong><%= friend.user.email%></strong>
+                      <%= link_to "Remove", group_friend_path(friend), :method => :delete,class: "btn btn-danger controllers" %>
+                    </li>
+                    <% end %>
+                  <% else %>
+                    <li class="list-group-item">
+                      <strong style="color:lightskyblue;">Sorry There isn't Any Friend Yet</strong>
+                    </li>
+                  <% end %>
+                    <% flash.each do |type, msg| %>
+                      <% if msg == "Please Select Specified Group" %>
+                        <div class="alert alert-danger col-6">
+                          <%= msg %>
+                        </div>
+                      <% end %>
+                      <% if msg == "Sorry this User Does Not Exist" %>
+                        <div class="alert alert-success col-6">
+                          <%= msg %>
+                        </div>
+                      <% end %>
+                  <% end %>
+                </ul>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
-
-  </div>
-</div>
+  </body>
+</html>
